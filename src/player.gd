@@ -33,8 +33,6 @@ func _process(delta):
 	   $AnimatedSprite.flip_v = velo.y > 0
 
 	
-	
-		
 
 
 func _on_player_body_entered(body):
@@ -46,3 +44,11 @@ func start(pos):
 	show()
 	$CollisionShape2D.disabled = false
 
+
+
+	
+	
+
+
+func game_over():
+	pass # Replace with function body.

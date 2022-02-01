@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/main.gd" type="Script" id=1]
+[ext_resource path="res://src/vill.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/player.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 8, -8, 0, 0, 0, 0, 512, 0, 0, 0, 0, 0, 1024, -8, 0, 0, 0, 0, 1024, 592, 0, 0, 0, 0, 0, 592, 0, 0, 0, 0, 8, -8 )
+}
+
+[node name="main" type="Node"]
+script = ExtResource( 1 )
+vill_scene = ExtResource( 2 )
+
+[node name="villtimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="scoretimer" type="Timer" parent="."]
+
+[node name="starttimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="startposition" type="Position2D" parent="."]
+position = Vector2( 0, 8 )
+
+[node name="vill_path" type="Path2D" parent="."]
+position = Vector2( 0, 8 )
+curve = SubResource( 1 )
+
+[node name="spawnlocation" type="PathFollow2D" parent="vill_path"]
+position = Vector2( 8.00037, -7.99999 )
+rotation = 0.0158716
+offset = 0.000732422
+
+[node name="player" parent="." instance=ExtResource( 3 )]
+
+[connection signal="timeout" from="villtimer" to="." method="_on_villtimer_timeout"]
+[connection signal="timeout" from="scoretimer" to="." method="_on_scoretimer_timeout"]
+[connection signal="timeout" from="starttimer" to="." method="_on_starttimer_timeout"]
